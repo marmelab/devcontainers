@@ -1,0 +1,26 @@
+{
+    "id": "node",
+    "version": "1.0.0",
+    "name": "Node",
+    "description": "marmelab's standard Node.js development container, with build-essential, sudo, and a non-root node user. The Node version and Debian variant are selectable.",
+    "documentationURL": "https://github.com/marmelab/devcontainers/tree/main/src/node",
+    "licenseURL": "https://github.com/marmelab/devcontainers/blob/main/LICENSE.md",
+    "options": {
+        "imageVariant": {
+            "type": "string",
+            "description": "Node image to use",
+            "proposals": [
+                "26-trixie",
+                "26-bookworm",
+                "24-trixie",
+                "24-bookworm",
+                "22-trixie",
+                "22-bookworm"
+            ],
+            "default": "24-trixie"
+        }
+    },
+    "platforms": [
+        "Any"
+    ]
+}

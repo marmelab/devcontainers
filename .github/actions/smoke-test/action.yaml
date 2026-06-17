@@ -1,0 +1,29 @@
+name: 'Smoke test'
+description: 'Build a devcontainer template and run its smoke tests'
+inputs:
+  template:
+    description: 'Template to test'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Build template
+      id: build_template
+      shell: bash
+      run: ${{ github.action_path }}/build.sh ${{ inputs.template }}
+
+    - name: Test template
+      id: test_template
+      shell: bash
+      run: ${{ github.action_path }}/test.sh ${{ inputs.template }}
