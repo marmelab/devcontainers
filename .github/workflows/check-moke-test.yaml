@@ -6,11 +6,12 @@ jobs:
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      templates: ${{ steps.set-templates.outputs.templates }}
+      # JSON array of matching filter keys, e.g. ["node"]. Consumed by the test matrix.
+      templates: ${{ steps.filter.outputs.changes }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@v4
         id: filter
         with:
           filters: |
@@ -23,13 +24,6 @@ jobs:
               - package-lock.json
               - .nvmrc
 
-      - name: Determine templates to test
-        id: set-templates
-        shell: bash
-        run: |
-          # Only test templates affected by the PR's changes.
-          echo "templates=${{ steps.filter.outputs.changes }}" >> "$GITHUB_OUTPUT"
-
   test:
     needs: [detect-changes]
     runs-on: ubuntu-latest
@@ -38,7 +32,7 @@ jobs:
       matrix:
         templates: ${{ fromJSON(needs.detect-changes.outputs.templates) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Smoke test for '${{ matrix.templates }}'
         id: smoke_test
