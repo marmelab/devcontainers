@@ -1,12 +1,11 @@
 {
-  "name": "Node",
+  "name": "Marmelab DevContainers",
   "build": {
     "dockerfile": "Dockerfile"
   },
   "workspaceFolder": "/workspaces/devcontainers",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/devcontainers,type=bind,consistency=cached",
-  "initializeCommand": "test -f \"$HOME/.claude.json\" && test -d \"$HOME/.claude\" || { echo 'ERROR: the claude-code feature bind-mounts ~/.claude.json (file) and ~/.claude (directory); both must exist on the host before opening this Dev Container. Run Claude Code once on the host to create them.' >&2; exit 1; }",
-  "postCreateCommand": "npm install",
+  "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind,consistency=cached",
+  "postCreateCommand": "zsh ./.devcontainer/post-create.sh",
   "features": {
     "./claude-code": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
