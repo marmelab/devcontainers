@@ -6,9 +6,9 @@ A Dev Container is a fully configured, reproducible development environment that
 
 ## Available templates
 
-| Template          | ID     | Description                                                                                                                                                                                                       |
-| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Node](src/node/) | `node` | Node.js development container with `build-essential`, `sudo`, and a `g` → `git` alias, running as a non-root `node` user. The Node major version and Debian variant are selectable via the `imageVariant` option. |
+| Template          | ID     | Description                                                                                                                                                                                 |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Node](src/node/) | `node` | Node.js development container with `build-essential` and `sudo`, running as a non-root `node` user. The Node major version and Debian variant are selectable via the `imageVariant` option. |
 
 ## Using a template
 
@@ -45,14 +45,14 @@ This drops a `.devcontainer/` folder into your project. Open the project in your
 │   └── node/
 │       ├── .devcontainer/  #   └─ the files copied into a consuming project
 │       ├── devcontainer-template.json  # template metadata & options
-│       ├── README.md       #   └─ auto-generated — do not edit by hand
-│       └── NOTES.md        #   └─ hand-written notes appended to the README
+│       ├── README.md       #   └─ template documentation (hand-written)
+│       └── NOTES.md        #   └─ extra notes for template consumers
 ├── test/                   # Smoke tests, one folder per template + shared utils
 │   ├── node/test.sh
 │   └── test-utils/test-utils.sh
 └── .github/
     ├── actions/smoke-test/ # Composite action: build a template + run its tests
-    └── workflows/          # CI (test on PR) and release (publish + docs)
+    └── workflows/          # CI (test on PR) and release (publish templates)
 ```
 
 ## Adding a new template
@@ -60,9 +60,7 @@ This drops a `.devcontainer/` folder into your project. Open the project in your
 1. Create `src/<template-id>/` containing a `devcontainer-template.json` and a `.devcontainer/` folder. Use `${templateOption:<name>}` placeholders for any configurable values declared under `options`.
 2. Add smoke tests in `test/<template-id>/test.sh` (see [Testing](#testing)).
 3. Reference the new template's path in the PR test filter in [test-pr.yaml](.github/workflows/test-pr.yaml) so CI picks it up.
-4. Document anything beyond the auto-generated options table in `src/<template-id>/NOTES.md`.
-
-> The published `README.md` inside each template folder is **auto-generated** from `devcontainer-template.json` (plus `NOTES.md`) by the release workflow. Edit `NOTES.md`, not `README.md`.
+4. Document the template in `src/<template-id>/README.md`, and add any extra consumer notes in `src/<template-id>/NOTES.md`.
 
 ## Testing
 
@@ -84,10 +82,7 @@ CI runs these automatically on every pull request that touches a template — se
 
 ## Releasing
 
-Publishing is manual and gated to `main`. Trigger the **Release Dev Container Templates & Generate Documentation** workflow ([release.yaml](.github/workflows/release.yaml)) via _workflow_dispatch_. It:
-
-1. Publishes every template under `src/` to `ghcr.io/marmelab/devcontainers`.
-2. Regenerates each template's `README.md` and opens a pull request with the documentation update.
+Publishing is manual and gated to `main`. Trigger the **Release Dev Container Templates** workflow ([release.yaml](.github/workflows/release.yaml)) via _workflow_dispatch_. It publishes every template under `src/` to `ghcr.io/marmelab/devcontainers`.
 
 ## Developing this repository
 

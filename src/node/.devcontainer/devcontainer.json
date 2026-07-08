@@ -2,13 +2,5 @@
   "name": "Node",
   "build": {
     "dockerfile": "Dockerfile"
-  },
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh"
-      }
-    }
-  },
-  "postCreateCommand": "bash .devcontainer/post-create.sh"
+  }
 }
