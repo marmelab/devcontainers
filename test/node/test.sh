@@ -8,7 +8,6 @@ check "npm" npm --version
 check "build-essential" gcc --version
 check "sudo" sudo true
 check "user" [ "$(whoami)" = "node" ]
-check "git-alias" grep -q 'alias g=' /home/node/.bash_aliases
 check "devcontainer-env" [ "${DEVCONTAINER}" = "true" ]
 
 # Report result
