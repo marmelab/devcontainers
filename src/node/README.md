@@ -1,12 +1,13 @@
+
 # Node (node)
 
 marmelab's standard Node.js development container, with build-essential, sudo, and a non-root node user. The Node version and Debian variant are selectable.
 
 ## Options
 
-| Options Id   | Description       | Type   | Default Value |
-| ------------ | ----------------- | ------ | ------------- |
-| imageVariant | Node image to use | string | 24-trixie     |
+| Options Id | Description | Type | Default Value |
+|-----|-----|-----|-----|
+| imageVariant | Node image to use | string | 24-trixie |
 
 ## What's included
 
@@ -32,6 +33,7 @@ Use the `imageVariant` option to pick the Node major version and Debian base (`t
 
 After applying the template, edit the generated `.devcontainer/Dockerfile` to install additional system packages, or `.devcontainer/devcontainer.json` to add [Features](https://containers.dev/features), VS Code extensions, ports, or lifecycle commands (`postCreateCommand`, etc.).
 
+
 ---
 
-_Note: This file was auto-generated from the [devcontainer-template.json](https://github.com/marmelab/devcontainers/blob/main/src/node/devcontainer-template.json). Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-template.json](https://github.com/marmelab/devcontainers/blob/main/src/node/devcontainer-template.json).  Add additional notes to a `NOTES.md`._
