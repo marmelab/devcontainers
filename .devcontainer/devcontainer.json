@@ -16,8 +16,13 @@
   "mounts": [
     {
       "type": "volume",
-      "source": "node-modules",
+      "source": "${devcontainerId}-node-modules",
       "target": "/workspaces/devcontainers/node_modules"
     }
-  ]
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": ["oxc.oxc-vscode"]
+    }
+  }
 }

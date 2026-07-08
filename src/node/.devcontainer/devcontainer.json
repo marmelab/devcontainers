@@ -2,5 +2,6 @@
   "name": "Node",
   "build": {
     "dockerfile": "Dockerfile"
-  }
+  },
+  "postCreateCommand": "bash post-create.sh"
 }

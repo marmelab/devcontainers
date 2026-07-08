@@ -1,8 +1,8 @@
-name: 'Smoke test'
-description: 'Build a devcontainer template and run its smoke tests'
+name: "Smoke test"
+description: "Build a devcontainer template and run its smoke tests"
 inputs:
   template:
-    description: 'Template to test'
+    description: "Template to test"
     required: true
 
 runs:

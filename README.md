@@ -6,8 +6,8 @@ A Dev Container is a fully configured, reproducible development environment that
 
 ## Available templates
 
-| Template | ID | Description |
-| --- | --- | --- |
+| Template          | ID     | Description                                                                                                                                                                                                       |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Node](src/node/) | `node` | Node.js development container with `build-essential`, `sudo`, and a `g` → `git` alias, running as a non-root `node` user. The Node major version and Debian variant are selectable via the `imageVariant` option. |
 
 ## Using a template
@@ -84,7 +84,7 @@ CI runs these automatically on every pull request that touches a template — se
 
 ## Releasing
 
-Publishing is manual and gated to `main`. Trigger the **Release Dev Container Templates & Generate Documentation** workflow ([release.yaml](.github/workflows/release.yaml)) via *workflow_dispatch*. It:
+Publishing is manual and gated to `main`. Trigger the **Release Dev Container Templates & Generate Documentation** workflow ([release.yaml](.github/workflows/release.yaml)) via _workflow_dispatch_. It:
 
 1. Publishes every template under `src/` to `ghcr.io/marmelab/devcontainers`.
 2. Regenerates each template's `README.md` and opens a pull request with the documentation update.
