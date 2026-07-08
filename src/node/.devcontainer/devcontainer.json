@@ -1,6 +1,25 @@
 {
-  "name": "Node",
+  "name": "${templateOption:containerName}",
   "build": {
     "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "${templateOption:workspaceFolder}",
+  "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind,consistency=cached",
+  "postCreateCommand": "zsh .devcontainer/post-create.sh",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "installOhMyZshConfig": true,
+      "configureZshAsDefaultShell": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
   }
 }
