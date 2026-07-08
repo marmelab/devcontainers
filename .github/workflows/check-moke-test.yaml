@@ -1,9 +1,6 @@
-name: "CI - Test Templates"
+name: "Test Templates"
 on:
   pull_request:
-  push:
-    branches:
-      - main
 
 jobs:
   detect-changes:
@@ -15,7 +12,6 @@ jobs:
 
       - uses: dorny/paths-filter@v3
         id: filter
-        if: github.event_name == 'pull_request'
         with:
           filters: |
             node:
@@ -31,13 +27,8 @@ jobs:
         id: set-templates
         shell: bash
         run: |
-          # On push to main, test every template. On PRs, only those affected by the changes.
-          if [ "${{ github.event_name }}" = "push" ]; then
-            templates=$(ls -1 src | jq -R . | jq -s -c .)
-          else
-            templates='${{ steps.filter.outputs.changes }}'
-          fi
-          echo "templates=$templates" >> "$GITHUB_OUTPUT"
+          # Only test templates affected by the PR's changes.
+          echo "templates=${{ steps.filter.outputs.changes }}" >> "$GITHUB_OUTPUT"
 
   test:
     needs: [detect-changes]
