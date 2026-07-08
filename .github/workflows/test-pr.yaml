@@ -1,15 +1,21 @@
 name: "CI - Test Templates"
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      templates: ${{ steps.filter.outputs.changes }}
+      templates: ${{ steps.set-templates.outputs.templates }}
     steps:
+      - uses: actions/checkout@v4
+
       - uses: dorny/paths-filter@v3
         id: filter
+        if: github.event_name == 'pull_request'
         with:
           filters: |
             node:
@@ -20,6 +26,18 @@ jobs:
               - package.json
               - package-lock.json
               - .nvmrc
+
+      - name: Determine templates to test
+        id: set-templates
+        shell: bash
+        run: |
+          # On push to main, test every template. On PRs, only those affected by the changes.
+          if [ "${{ github.event_name }}" = "push" ]; then
+            templates=$(ls -1 src | jq -R . | jq -s -c .)
+          else
+            templates='${{ steps.filter.outputs.changes }}'
+          fi
+          echo "templates=$templates" >> "$GITHUB_OUTPUT"
 
   test:
     needs: [detect-changes]

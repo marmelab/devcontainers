@@ -11,6 +11,12 @@
     "./claude-code": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "moby": false
+    },
+    "ghcr.io/devcontainers/features/common-utils": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "installOhMyZshConfig": true,
+      "configureZshAsDefaultShell": true
     }
   },
   "mounts": [
@@ -22,7 +28,10 @@
   ],
   "customizations": {
     "vscode": {
-      "extensions": ["oxc.oxc-vscode"]
+      "extensions": ["oxc.oxc-vscode"],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
     }
   }
 }
