@@ -3,5 +3,12 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  },
   "postCreateCommand": "bash post-create.sh"
 }
